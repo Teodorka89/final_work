@@ -1,0 +1,203 @@
+Консоль . WriteLine ( " Задача: Написать программу, которая из массива строк формирует новые массивы строк, длина которых меньше, либо равна 3 символам. смесью редких массивов. " );
+
+строка [] LoadMenu ()
+{
+    строка [] меню  =  новая  строка [ 3 ];
+    меню [ 0 ] =  " Выход " ;
+    меню [ 1 ] =  " Автоматическое тестирование " ;
+    меню [ 2 ] =  " Ручное тестирование " ;
+     меню возврата ;
+}
+void  PrintMenu ( строка [] меню )
+{
+    Консоль . НаписатьСтроку ();
+    Консоль . WriteLine ( " ----- МЕНЮ -------------- " );
+    for ( int  я  =  0 ; я  <  меню . Длина ; я ++ )
+    {
+        Консоль . WriteLine ( $" { i }) "  +  меню [ i ]);
+    }
+}
+int  GetSelectMenu ( строка [] меню )
+{
+    Меню печати ( меню );
+      интервал selectMenu =  1 ;
+    пока ( правда )
+    {
+        Консоль . Написать ( " Выберите пункт меню: " );
+        выбратьМеню  =  интервал . Разобрать ( Console.ReadLine( )) ;
+        если ( selectMenu  <  0  ||  selectMenu  >  меню . Длина )
+        {
+            продолжить ;
+        }
+        Консоль . НаписатьСтроку ();
+        вернуть  selectMenu ;
+    }
+}
+строка  GetRandomString ( int  maxCountChars  =  10 )
+{
+    если ( maxCountChars  <=  0 )
+    {
+        throw  new  ArgumentException ( " Длиина строки должна быть больше 0! " );
+    }
+
+    const  string  arrayChars  =  " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 " ;
+
+    строка  текущая строка  =  " " ;
+    int  indexChar  =  0 ;
+    int  countChars  =  0 ;
+    в то время как ( countChars  <  maxCountChars )
+    {
+        indexChar  =  новый  случайный (). Далее ( 0 , arrayChars . Длина  -  1 );
+
+        currentString  +=  arrayChars [ indexChar ];
+        количествоЧарс ++ ;
+    }
+    вернуть  текущую структуру ;
+}
+
+строка [] FillArrayRandom ( int  sizeArray  =  10 , int  maxLenghtString  =  10 )
+{
+    если ( sizeArray  <=  0 )
+    {
+        throw  new  ArgumentException ( " Размер массива должен быть больше 0! " );
+    }
+    если ( maxLenghtString  <=  0 )
+    {
+        throw  new  ArgumentException ( " максимальная длительность строки должна быть больше 0! " );
+    }
+
+    строка [] arrayString  =  новая  строка [ sizeArray ];
+    for ( int  i  =  0 , sizeString  =  0 ; i  <  sizeArray ; i ++ )
+    {
+        sizeString  =  новый  случайный (). Далее ( 1 , maxLenghtString );
+        arrayString [ i ] =  GetRandomString ( sizeString );
+    }
+
+    вернуть  строку массива ;
+}
+
+строка [] FillArrayManual ( int  sizeArray  =  10 )
+{
+    если ( sizeArray  <=  0 )
+    {
+        throw  new  ArgumentException ( " Размер массива должен быть больше 0! " );
+    }
+
+    строка [] arrayString  =  новая  строка [ sizeArray ];
+    for ( int  i  =  0 , sizeString  =  0 ; i  <  sizeArray ; i ++ )
+    {
+        Консоль . Write ( $" Введите заявку {( i  +  1 )}: " );
+        arrayString [ i ] =  Консоль . ЧитатьСтроку ();
+    }
+
+    вернуть  строку массива ;
+}
+
+строка [] GetStringsInArrayByMaxLenght ( строка [] массив , int  maxLength  =  3 )
+{
+    int  sizeFinalArray  =  0 ;
+    int  sizeArray  =  массив . длина ;
+    строка [] tmpArray  =  новая  строка [ sizeArray ];
+    for ( int  index  =  0 , tmpIndex  =  0 ; index  <  sizeArray ; index ++ )
+    {
+        если ( массив [ индекс ]. Длина  <=  maxLength )
+        {
+            tmpArray [ tmpIndex ] =  массив [ индекс ];
+            tmpIndex ++ ;
+            размер конечного массива ++ ;
+        }
+    }
+
+    строка [] finalArray  =  новая  строка [ sizeFinalArray ];
+    for ( int  index  =  0 ; index  <  sizeFinalArray ; index ++ )
+    {
+        finalArray [ индекс ] =  tmpArray [ индекс ];
+    }
+
+    вернуть  окончательный массив ;
+}
+
+недействительным  PrintArrayString ( строка [] arrayString )
+{
+    Консоль . WriteLine ( " ----- МАССИВ ----------- " );
+    если ( строка массива . Длина  ==  0 )
+    {
+        Консоль . WriteLine ( " массив пуст " );
+    }
+    for ( int  i  =  0 ; i  <  arrayString . Length ; i ++ )
+    {
+        Консоль . WriteLine ( $" {( i  +  1 )}) "  +  arrayString [ i ]);
+    }
+}
+
+недействительный  запуск автотеста ()
+{
+    Консоль . WriteLine ( " ----- 1) АВТО ТЕСТИРОВАНИЕ ----------- " );
+
+    Консоль . WriteLine ( " ----- ЗАПОЛНЕНИЕ МАССИВА -------------- " );
+    int  sizeArrayString  =  10 ;
+    строка [] массив  =  FillArrayRandom ( sizeArrayString , 10 );
+    PrintArrayString ( массив );
+
+    Консоль . WriteLine ( " ----- ПОИСК СТРОКА --------------------- " );
+     интервал  maxLengthString =  3 ;
+    Консоль . Write ( $" максимальная длина длины: { maxLengthString } " );
+    Консоль . НаписатьСтроку ();
+    строка [] findArray  =  GetStringsInArrayByMaxLenght ( массив , maxLengthString );
+    РаспечататьМассивСтроки ( найтиМассив );
+}
+
+недействительным  RunManualTest ()
+{
+    Консоль . WriteLine ( " ----- 2) РУЧНОЕ ТЕСТИРОВАНИЕ ---------- " );
+    Консоль . WriteLine ( " ----- ЗАПОЛНЕНИЕ МАССИВА -------------- " );
+    Консоль . Write ( " Укажите массив размера строки: " );
+    int  sizeArrayString  =  int . Разобрать ( Console.ReadLine ( )) ;
+    если ( sizeArrayString  <=  0 )
+    {
+        Консоль . WriteLine ( " Размер массива должен быть больше 0! " );
+        возврат ;
+    }
+    строка [] массив  =  FillArrayManual ( sizeArrayString );
+    PrintArrayString ( массив );
+
+    Консоль . WriteLine ( " ----- ПОИСК СТРОКА --------------------- " );
+    Консоль . Write ( " максимальная длина длины: " );
+     интервал  maxLengthString =  интервал . Разобрать ( Console.ReadLine ( )) ;
+    если ( maxLengthString  <=  0 )
+    {
+        Консоль . WriteLine ( " Длина строки должна быть больше 0! " );
+        возврат ;
+    }
+    еще
+    {
+        строка [] findArray  =  GetStringsInArrayByMaxLenght ( массив , maxLengthString );
+        РаспечататьМассивСтроки ( найтиМассив );
+    }
+}
+
+пытаться
+{
+    строка [] меню  =  LoadMenu ();
+    int  selectMenu  =  GetSelectMenu ( меню );
+    пока ( selectMenu  !=  0 )
+    {
+        переключатель ( selectMenu )
+        {
+            случай  1 :
+                Запустить автотест ();
+                перерыв ;
+            случай  2 :
+                ВыполнитьРучнойТест ();
+                перерыв ;
+            по умолчанию :
+                Консоль . WriteLine ( " Неизвестная Операция! " );
+                перерыв ;
+        }
+        selectMenu  =  GetSelectMenu ( меню );
+    }
+}
+поймать ( Исключение  ex )
+{
+    Консоль . WriteLine ( $" Произошло исключение: { ex . Message } " );
+}
